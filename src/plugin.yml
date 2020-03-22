@@ -1,0 +1,8 @@
+name: HS-Minigames
+version: 1.0
+author: RySty
+main: mc.rysty.heliosphereminigames.HelioSphereMinigames
+
+commands:
+  queue:
+  bedwarsstats:

@@ -1,0 +1,23 @@
+#messages
+console-error-message: "This command can only be executed by a player."
+no-perm-message: "You do not have permission to do this."
+world-error-message: "&cThe command provided cannot be executed in this world."
+player-offline-message: "&c&l(!)&e Could not find the specified player."
+
+queueCommand:
+  argument-error: "&cYou did not provide an acceptable amount of arguments! Accepted arguments: join, leave, create"
+  argument-provided-error: "&cThe argument provided cannot be accepted. Accepted arguments: join, leave, create"
+  create-argument-error: "&cCorrect format: /queue create <minigame>"
+  join-argument-error: "&cCorrect format: /queue join <minigame>"
+  leave-argument-error: "&cToo many arguments were provided! Correct format: /queue leave"
+  queue-doesnot-exist: "&cThe queue provided does not exist!"
+  queue-already-exists: "&cThe queue provided already exists!"
+  current-queue-error: "&cYou cannot join another queue as you are already in one!"
+  queue-created: "&eThe queue &7<queue>&e has been created. Modify any of the queue's settings in queues.yml."
+  joined-queue: "&e<player>&e has joined the queue &6(&b<playercount>&6/&b<maxplayercount>&6)&e."
+  left-queue: "&e<player>&e has left the queue &6(&b<playercount>&6/&b<maxplayercount>&6)&e."
+  player-left-queue: "&eYou have left the queue."
+  game-running-error: "&cThe lobby could not be joined because there are no available servers."
+  leave-error-message: "&cThis command cannot be executed because you are not in a queue."
+Spawn:
+  no-block-modify: "&cYou cannot modify blocks in this gamemode"
