@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import mc.rysty.heliosphereminigames.commands.BedwarsStats;
 import mc.rysty.heliosphereminigames.minigames.CaptureTheFlag;
 import mc.rysty.heliosphereminigames.minigames.SpawnBuildProtection;
 import mc.rysty.heliosphereminigames.minigames.SpawnDamageProtection;
@@ -29,7 +28,6 @@ public class HelioSphereMinigames extends JavaPlugin {
 		settings.setup(this);
 
 		/** Game-related. */
-		new BedwarsStats(this);
 		pm.registerEvents(new SpawnBuildProtection(), this);
 		pm.registerEvents(new SpawnDamageProtection(), this);
 		pm.registerEvents(new CaptureTheFlag(), this);
