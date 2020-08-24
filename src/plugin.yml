@@ -1,7 +1,8 @@
 name: HS-Minigames
-version: 1.0
+version: 2.1
 author: RySty
 main: mc.rysty.heliosphereminigames.HelioSphereMinigames
+api-version: 1.16
 
 commands:
   queue:

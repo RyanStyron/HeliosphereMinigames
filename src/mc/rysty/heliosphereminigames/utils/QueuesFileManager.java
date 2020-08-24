@@ -8,46 +8,31 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 
 public class QueuesFileManager {
 
-	private QueuesFileManager() {
-	}
-
-	static QueuesFileManager instance = new QueuesFileManager();
+	private static QueuesFileManager instance = new QueuesFileManager();
 
 	public static QueuesFileManager getInstance() {
 		return instance;
 	}
 
-	Plugin p;
+	private FileConfiguration data;
+	private File dataFile;
 
-	FileConfiguration config;
-	File cfile;
+	public void setup(Plugin plugin) {
+		if (!plugin.getDataFolder().exists())
+			plugin.getDataFolder().mkdir();
 
-	FileConfiguration data;
-	File dfile;
+		dataFile = new File(plugin.getDataFolder(), "queues.yml");
 
-	public void setup(Plugin p) {
-		cfile = new File(p.getDataFolder(), "config.yml");
-		config = p.getConfig();
-
-		if (!p.getDataFolder().exists()) {
-			p.getDataFolder().mkdir();
-		}
-
-		dfile = new File(p.getDataFolder(), "queues.yml");
-
-		if (!dfile.exists()) {
+		if (!dataFile.exists())
 			try {
-				dfile.createNewFile();
-			} catch (IOException e) {
+				dataFile.createNewFile();
+			} catch (IOException exception) {
 				Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not create queues.yml!");
 			}
-		}
-
-		data = YamlConfiguration.loadConfiguration(dfile);
+		data = YamlConfiguration.loadConfiguration(dataFile);
 	}
 
 	public FileConfiguration getData() {
@@ -56,34 +41,13 @@ public class QueuesFileManager {
 
 	public void saveData() {
 		try {
-			data.save(dfile);
+			data.save(dataFile);
 		} catch (IOException e) {
 			Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not save queues.yml!");
 		}
 	}
 
 	public void reloadData() {
-		data = YamlConfiguration.loadConfiguration(dfile);
+		data = YamlConfiguration.loadConfiguration(dataFile);
 	}
-
-	public FileConfiguration getConfig() {
-		return config;
-	}
-
-	public void saveConfig() {
-		try {
-			config.save(cfile);
-		} catch (IOException e) {
-			Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not save config.yml!");
-		}
-	}
-
-	public void reloadConfig() {
-		config = YamlConfiguration.loadConfiguration(cfile);
-	}
-
-	public PluginDescriptionFile getDesc() {
-		return p.getDescription();
-	}
-
 }
