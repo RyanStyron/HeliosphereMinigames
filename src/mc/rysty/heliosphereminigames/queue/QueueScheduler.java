@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -73,10 +75,21 @@ public class QueueScheduler {
 
     private static void endQueue(String minigame, Player player) {
         int remainingCountdownTime = minigameQueueCountdownMap.get(minigame);
+        HashMap<Integer, Boolean> countdownIntegerMap = new HashMap<Integer, Boolean>();
 
-        if (remainingCountdownTime > 0)
-            MessageUtils.message(player, "&6&l(!)&f Game beginning in&b " + remainingCountdownTime + " &fseconds!");
-        else {
+        countdownIntegerMap.put(1, true);
+        countdownIntegerMap.put(2, true);
+        countdownIntegerMap.put(3, true);
+        countdownIntegerMap.put(10, false);
+
+        if (remainingCountdownTime > 0) {
+            if (countdownIntegerMap.containsKey(remainingCountdownTime)) {
+                MessageUtils.message(player, "&6&l(!)&f Game beginning in&b " + remainingCountdownTime + " &fseconds!");
+
+                if (countdownIntegerMap.get(remainingCountdownTime))
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, 1, 2);
+            }
+        } else {
             QueueHelper.removePlayerFromQueue(player, false);
             player.getScoreboardTags().add(queuesFile.getString("queues." + minigame + ".gametag"));
             queuesFile.set("queues." + minigame + ".running", false);

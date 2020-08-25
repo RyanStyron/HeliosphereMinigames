@@ -111,7 +111,8 @@ public class QueueHelper {
 			queuesFile.set("players." + playerId, null);
 			queuesManager.saveData();
 
-			MessageUtils.configStringMessage(player, "queueCommand.player-left-queue");
+			if (sendLeaveMessage)
+				MessageUtils.configStringMessage(player, "queueCommand.player-left-queue");
 			player.teleport(player.getWorld().getSpawnLocation());
 			player.getScoreboardTags().remove(queuesFile.getString("queues." + playerQueue + ".queuetag"));
 
